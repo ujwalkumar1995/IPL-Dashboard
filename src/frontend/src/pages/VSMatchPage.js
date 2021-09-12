@@ -1,39 +1,39 @@
 import { React, useEffect, useState } from 'react';
 import { MatchDetailCard } from '../components/MatchDetailCard';
 import {useParams} from 'react-router-dom'
-import './MatchPage.scss'
-import { YearSelector } from '../components/YearSelector';
+import './VSMatchPage.scss'
 import { VSTeamSelector } from '../components/VSTeamSelector';
+import { YearSelector } from '../components/YearSelector';
 
-export const MatchPage = () => {
+export const VSMatchPage = () => {
   
   const [matches,setMatches] = useState([]);
-  const {teamName,year} = useParams();
+  const {team1,team2} = useParams();
   useEffect(
     () => {
           const fetchMatches = async () => {
-          const response = await fetch(`${process.env.REACT_APP_API_ROOT_URL}/team/${teamName}/matches?year=${year}`);
+          const response = await fetch(`${process.env.REACT_APP_API_ROOT_URL}/matches/${team1}/${team2}`);
           const data = await response.json();
           setMatches(data);
       };
       fetchMatches();
     },
-    [teamName,year]
+    [team1,team2]
   );
 
   return (
     <div className="MatchPage">
-        <div className="year-selector">
+        <div className="team-selector">
           <h3>Select Year</h3>
-          <YearSelector  teamName={teamName}/>
+          <YearSelector  teamName={team1}/>  
           <h3>Select Oppenent</h3>
-          <VSTeamSelector teamName={teamName}/>
+          <VSTeamSelector teamName={team1}/>
         </div>
         
         <div>
-        <h1 className = "page-heading">{teamName} matches in {year}</h1>
+        <h1 className = "page-heading">{team1} vs {team2}</h1>
           {
-            matches.map(match => <MatchDetailCard key={match.id} teamName={teamName} match={match} />)
+            matches.map(match => <MatchDetailCard key={match.id} teamName={team1} match={match} />)
           }
         </div>
     </div>

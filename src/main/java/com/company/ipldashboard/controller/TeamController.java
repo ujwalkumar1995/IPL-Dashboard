@@ -31,6 +31,8 @@ public class TeamController {
     public Iterable<Team> getAllTeams(){
         return this.teamRepository.findAll();
     }
+
+
         
     @GetMapping("/team/{teamName}")
     public Team getTeam(@PathVariable String teamName){
@@ -47,6 +49,14 @@ public class TeamController {
             teamName, 
             startDate, 
             endDate
+            );
+    }
+
+    @GetMapping("/matches/{team1}/{team2}")
+    public List<Match> getMatchesBetweenTwoTeams(@PathVariable String team1,@PathVariable String team2){
+        return this.matchRepository.getMatchesBetweenTwoTeams(
+            team1, 
+            team2
             );
     }
 
