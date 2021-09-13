@@ -4,7 +4,7 @@ import { MatchSmallCard } from '../components/MatchSmallCard';
 import {useParams, Link} from 'react-router-dom'
 import './TeamPage.scss'
 import { WinLossChart } from '../components/WinLossChart';
-import { PieChart } from 'react-minimal-pie-chart';
+import { HomeIcon } from '../components/HomeIcon';
 
 export const TeamPage = () => {
   const [team,setTeam] = useState({matches:[]});
@@ -25,6 +25,8 @@ export const TeamPage = () => {
     return <h1>Team not found</h1>
   }
   return (
+    <div>
+      <HomeIcon/>
     <div className="TeamPage">
         <div className="team-name-section">
           <h1 className="team-name">{team.teamName}</h1>
@@ -41,6 +43,7 @@ export const TeamPage = () => {
         <Link to ={`/teams/${teamName}/matches/${team.matches[0].date.split("-")[0]}`}>More ></Link>
           
         </div>
+    </div>
     </div>
   );
 }

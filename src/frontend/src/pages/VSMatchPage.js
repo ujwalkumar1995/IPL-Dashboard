@@ -4,6 +4,7 @@ import {useParams} from 'react-router-dom'
 import './VSMatchPage.scss'
 import { VSTeamSelector } from '../components/VSTeamSelector';
 import { YearSelector } from '../components/YearSelector';
+import { HomeIcon } from '../components/HomeIcon';
 
 export const VSMatchPage = () => {
   
@@ -20,8 +21,28 @@ export const VSMatchPage = () => {
     },
     [team1,team2]
   );
-
+  if(matches == null || matches.length == 0)
+  return(
+    <div>
+      <HomeIcon/>
+    <div className="VSMatchPage">
+        <div className="team-selector">
+          <h3>Select Year</h3>
+          <YearSelector  teamName={team1}/>  
+          <h3>Select Oppenent</h3>
+          <VSTeamSelector teamName={team1}/>
+        </div>
+        
+        <div>
+        <h1 className = "no-matches-found">No Matches Found</h1>
+        </div>
+    </div>
+    </div>  
+  )
+  else
   return (
+    <div>
+      <HomeIcon/>
     <div className="MatchPage">
         <div className="team-selector">
           <h3>Select Year</h3>
@@ -37,6 +58,8 @@ export const VSMatchPage = () => {
           }
         </div>
     </div>
+    </div>
   );
+  
 }
 
